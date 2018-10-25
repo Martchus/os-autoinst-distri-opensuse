@@ -164,7 +164,9 @@ sub run {
             });
     }
 
-    $svirt->add_vnc({port => get_var('VIRSH_INSTANCE', 1) + 5900});
+    my $virsh_instance = get_var('VIRSH_INSTANCE', 1);
+    $svirt->add_vnc({port => $virsh_instance + 5900});
+    $svirt->add_serial_console({port => $virsh_instance});
 
     my %ifacecfg = ();
 
