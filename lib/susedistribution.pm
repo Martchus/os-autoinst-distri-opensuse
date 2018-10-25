@@ -26,7 +26,8 @@ sub handle_password_prompt {
         type_string get_required_var('VIRSH_GUEST_PASSWORD');
     }
     elsif ($console eq 'svirt') {
-        type_string(get_required_var(check_var('VIRSH_VMM_FAMILY', 'hyperv') ? 'HYPERV_PASSWORD' : 'VIRSH_PASSWORD'));
+        my $password = get_var(check_var('VIRSH_VMM_FAMILY', 'hyperv') ? 'HYPERV_PASSWORD' : 'VIRSH_PASSWORD');
+        type_string($password) if ($password);
     }
     else {
         type_password;
@@ -342,20 +343,28 @@ sub become_root {
 sub init_consoles {
     my ($self) = @_;
 
+    my $is_backend_qemu = check_var('BACKEND', 'qemu');
+    my $is_backend_svirt = check_var('BACKEND', 'svirt');
+
     # avoid complex boolean logic by setting interim variables
-    if (check_var('BACKEND', 'svirt')) {
+    if ($is_backend_svirt) {
         if (check_var('ARCH', 's390x')) {
             set_var('S390_ZKVM',         1);
             set_var('SVIRT_VNC_CONSOLE', 'x11');
         }
     }
 
-    if (check_var('BACKEND', 'qemu')) {
-        $self->add_console('root-virtio-terminal', 'virtio-terminal', {});
+    if ($is_backend_qemu || $is_backend_svirt) {
+        my %backend_args;
+        if ($is_backend_svirt) {
+            # pass the path to the qemu virtio console if available
+            $backend_args{socket_path} = "/var/lib/libvirt/qemu/channel/target/domain-4-openQA-SUT-1/org.openqa.console.virtio_console";
+        }
+        $self->add_console('root-virtio-terminal', 'virtio-terminal', \%backend_args);
     }
 
     # svirt backend, except s390x ARCH
-    if (!get_var('S390_ZKVM') and check_var('BACKEND', 'svirt')) {
+    if (!get_var('S390_ZKVM') and $is_backend_svirt) {
         my $hostname = get_var('VIRSH_GUEST');
         my $port = get_var('VIRSH_INSTANCE', 1) + 5900;
 
@@ -371,7 +380,7 @@ sub init_consoles {
     }
 
     if (get_var('BACKEND', '') =~ /qemu|ikvm|generalhw/
-        || (check_var('BACKEND', 'svirt') && !get_var('S390_ZKVM')))
+        || ($is_backend_svirt && !get_var('S390_ZKVM')))
     {
         $self->add_console('install-shell',  'tty-console', {tty => 2});
         $self->add_console('installation',   'tty-console', {tty => check_var('VIDEOMODE', 'text') ? 1 : 7});

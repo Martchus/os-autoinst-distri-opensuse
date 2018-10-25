@@ -165,6 +165,7 @@ sub run {
     }
 
     $svirt->add_vnc({port => get_var('VIRSH_INSTANCE', 1) + 5900});
+    $svirt->add_virtio_console();
 
     my %ifacecfg = ();
 
