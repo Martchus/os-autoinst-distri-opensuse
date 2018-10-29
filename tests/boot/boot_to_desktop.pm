@@ -35,6 +35,10 @@ sub run {
     else {
         $self->wait_boot(bootloader_time => $timeout, nologin => $nologin);
     }
+
+    # enable serial console
+    # FIXME: Where is the right place to run this? Add a test API for this?
+    enable_serial_for_svirt_backend();
 }
 
 sub test_flags {

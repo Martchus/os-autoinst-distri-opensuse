@@ -19,7 +19,7 @@ use base Exporter;
 use Exporter;
 
 use strict;
-use testapi qw(is_serial_terminal :DEFAULT);
+use testapi qw(get_required_var is_serial_terminal type_string :DEFAULT);
 use lockapi 'mutex_wait';
 use mm_network;
 use version_utils qw(is_caasp is_leap is_sle is_sle12_hdd_in_upgrade sle_version_at_least is_storage_ng is_jeos);
@@ -1020,6 +1020,13 @@ sub show_tasks_in_blocked_state {
 
 sub svirt_host_basedir {
     return get_var('VIRSH_OPENQA_BASEDIR', '/var/lib');
+}
+
+sub enable_serial_for_svirt_backend {
+    return unless get_required_var('BACKEND') eq 'svirt';
+    type_string(
+        "$testapi::username\n$testapi::password\nsudo systemctl start serial-getty\@ttyS1\n$testapi::password\n"
+    );
 }
 
 1;

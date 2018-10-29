@@ -583,6 +583,8 @@ sub select_serial_terminal {
         $console = $root ? 'root-console' : 'user-console';
     } elsif ($backend =~ /^(ikvm|ipmi|spvm)$/) {
         $console = 'root-ssh';
+    } elsif ($backend eq 'svirt') {
+        $console = 'svirt-serial';
     }
 
     die "No support for backend '$backend', add it" if ($console eq '');

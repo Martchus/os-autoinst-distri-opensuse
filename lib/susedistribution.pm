@@ -26,7 +26,8 @@ sub handle_password_prompt {
         type_string get_required_var('VIRSH_GUEST_PASSWORD');
     }
     elsif ($console eq 'svirt') {
-        type_string(get_required_var(check_var('VIRSH_VMM_FAMILY', 'hyperv') ? 'HYPERV_PASSWORD' : 'VIRSH_PASSWORD'));
+        my $password = get_var(check_var('VIRSH_VMM_FAMILY', 'hyperv') ? 'HYPERV_PASSWORD' : 'VIRSH_PASSWORD');
+        type_string($password) if ($password);
     }
     else {
         type_password;
@@ -368,6 +369,9 @@ sub init_consoles {
                 password => $testapi::password
             });
         set_var('SVIRT_VNC_CONSOLE', 'sut');
+
+        $self->add_console('svirt-serial', 'ssh-virtsh-serial', {});
+        set_var('SVIRT_SERIAL_CONSOLE', 'svirt-serial');
     }
 
     if (get_var('BACKEND', '') =~ /qemu|ikvm|generalhw/
