@@ -19,7 +19,15 @@ use upload_system_log;
 
 sub run {
     my ($self) = @_;
-    select_virtio_console();
+    #select_virtio_console();
+    record_info(debug => 'force use of console sut-serial (sshVirtshSUT.pm)');
+    select_console('sut-serial');
+    record_info(debug => 'is_serial_terminal: ' . testapi::is_serial_terminal);
+    type_string("echo foo\n");
+    testapi::wait_serial("foo", undef, 0, no_regex => 1);
+
+    record_info(debug => 'starting the actual trinity test');
+
     my $trinity     = 'trinity-1.8';
     my $trinity_log = script_output("echo ~$testapi::username/trinity.log");
     my $syscall_cnt = 1000000;

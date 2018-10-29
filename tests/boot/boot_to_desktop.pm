@@ -35,6 +35,17 @@ sub run {
     else {
         $self->wait_boot(bootloader_time => $timeout, nologin => $nologin);
     }
+
+    # enable serial console
+    # FIXME: Where is the right place to run this? Add a test API for this?
+    type_string("bernhard\n");
+    sleep 1;
+    type_string("nots3cr3t\n");
+    sleep 1;
+    type_string("sudo systemctl start serial-getty\@ttyS1\n");
+    sleep 1;
+    type_string("nots3cr3t\n");
+    sleep 1;
 }
 
 sub test_flags {
