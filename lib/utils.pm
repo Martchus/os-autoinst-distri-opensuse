@@ -1018,6 +1018,10 @@ sub show_tasks_in_blocked_state {
     }
 }
 
+sub openqa_basedir {
+    return $ENV{OPENQA_BASEDIR} // '/var/lib';
+}
+
 sub svirt_host_basedir {
     return get_var('VIRSH_OPENQA_BASEDIR', '/var/lib');
 }
