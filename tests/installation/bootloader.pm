@@ -24,7 +24,7 @@ use utils;
 sub run {
     return if pre_bootmenu_setup == 3;
     return if select_bootmenu_option == 3;
-    assert_screen("lets_fail_here", 5);
+    assert_screen("lets_fail_here", 120);
     bootmenu_default_params;
     bootmenu_network_source;
     specific_bootmenu_params;
