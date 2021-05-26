@@ -28,6 +28,8 @@ use main_common;
 use known_bugs;
 use YuiRestClient;
 
+bmwqemu::diag 'Running custom version';
+
 init_main();
 
 sub cleanup_needles {
