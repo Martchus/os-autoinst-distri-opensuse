@@ -7,6 +7,7 @@
 
 requires 'Carp';
 requires 'Code::DRY';
+requires 'Code::TidyAll';
 requires 'Config::Tiny';
 requires 'Cwd';
 requires 'Data::Dump';
