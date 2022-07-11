@@ -28,6 +28,7 @@ use constant {
           is_hyperv
           is_hyperv_in_gui
           is_svirt_except_s390x
+          is_svirt_vmware
           is_pvm
           is_xen_pv
           is_ipmi
@@ -159,6 +160,16 @@ Returns true if the current instance is running as svirt backend except s390x
 
 sub is_svirt_except_s390x {
     return !get_var('S390_ZKVM') && check_var('BACKEND', 'svirt');
+}
+
+=head2 is_svirt_vmware
+
+Returns true if the current instance is running as svirt backend using VMWare
+
+=cut
+
+sub is_svirt_vmware {
+    return check_var('VIRSH_VMM_FAMILY', 'vmware') && check_var('BACKEND', 'svirt');
 }
 
 =head2 is_pvm
