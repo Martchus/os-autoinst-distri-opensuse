@@ -3,6 +3,7 @@ use base 'distribution';
 use serial_terminal ();
 use strict;
 use warnings;
+use Mojo::URL;
 use Utils::Architectures;
 use utils qw(
   disable_serial_getty
@@ -452,17 +453,18 @@ sub init_consoles {
     # svirt backend, except s390x ARCH
     if (is_svirt_except_s390x) {
         my $hostname = get_var('VIRSH_GUEST');
-        my $port = get_var('VIRSH_INSTANCE', 1) + 5900;
-
-        $self->add_console(
-            'sut',
-            'vnc-base',
-            {
-                hostname => $hostname,
-                port => $port,
-                password => $testapi::password
-            });
+        my $instance = get_var('VIRSH_INSTANCE', 1);
+        my %backend_args = (hostname => $hostname, port => $instance + 5900, password => $testapi::password);
+        if (get_var('VMWARE_VNC_OVER_WS')) {
+            my $host = get_required_var('VMWARE_HOST');
+            my $user = get_var('VMWARE_USERNAME', 'root');
+            my $password = get_var('VMWARE_PASSWORD', $testapi::password);
+            my $url = Mojo::URL->new("https://$host")->userinfo("$user:$password");
+            $backend_args{vmware_vnc_over_ws_url} = $url->to_unsafe_string;
+        }
+        $self->add_console('sut', 'vnc-base', \%backend_args);
         set_var('SVIRT_VNC_CONSOLE', 'sut');
+
     } else {
         # sut-serial (serial terminal: emulation of QEMU's virtio console for svirt)
         $self->add_console('root-sut-serial', 'ssh-virtsh-serial', {
