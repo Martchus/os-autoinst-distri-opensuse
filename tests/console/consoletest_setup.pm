@@ -22,7 +22,7 @@ use base "consoletest";
 use testapi;
 use serial_terminal 'select_serial_terminal';
 use version_utils 'is_leap';
-use utils qw(check_console_font disable_serial_getty);
+use utils qw(check_console_font clear_console disable_serial_getty);
 use Utils::Backends qw(has_ttys);
 use Utils::Systemd qw(disable_and_stop_service systemctl);
 use Utils::Logging 'export_logs';
@@ -33,6 +33,11 @@ use warnings;
 sub run {
     my $user = $testapi::username;
     select_serial_terminal;
+
+    while (1) {
+        clear_console();
+        assert_script_run("true");
+    }
 
     systemctl('start sshd');
 
