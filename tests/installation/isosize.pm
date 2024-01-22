@@ -13,6 +13,8 @@ use strict;
 use warnings;
 use testapi;
 
+use OpenQA::Wheel::Launcher;
+
 sub run {
     my $self = shift;
     my $iso = get_var("ISO") || get_var('HDD_1');
