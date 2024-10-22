@@ -32,7 +32,7 @@
       <listentry>
         <alias>SLE-Module-Basesystem</alias>
         % if ($check_var->('VERSION', '15-SP1')) {
-        <media_url><![CDATA[http://dist.suse.de/install/SLP/SLE-<%= $get_var->('VERSION') %>-Module-Basesystem-GM/<%= $get_var->('ARCH') %>/DVD1/]]></media_url>
+        <media_url><![CDATA[http://<%= $get_var->('DIST_SUSE_DE_MIRROR', 'dist.suse.de') %>/install/SLP/SLE-<%= $get_var->('VERSION') %>-Module-Basesystem-GM/<%= $get_var->('ARCH') %>/DVD1/]]></media_url>
         <product_dir>/</product_dir>
         % } else {
 	<media_url><![CDATA[<%= $get_var->('MIRROR_HTTP') %>]]></media_url>
@@ -44,7 +44,7 @@
       <listentry>
         <alias>SLE-Module-Server-Applications</alias>
         % if ($check_var->('VERSION', '15-SP1')) {
-        <media_url><![CDATA[http://dist.suse.de/install/SLP/SLE-<%= $get_var->('VERSION') %>-Module-Server-Applications-GM/<%= $get_var->('ARCH') %>/DVD1/]]></media_url>
+        <media_url><![CDATA[http://<%= $get_var->('DIST_SUSE_DE_MIRROR', 'dist.suse.de') %>/install/SLP/SLE-<%= $get_var->('VERSION') %>-Module-Server-Applications-GM/<%= $get_var->('ARCH') %>/DVD1/]]></media_url>
         <product_dir>/</product_dir>
         % } else {
 	<media_url><![CDATA[<%= $get_var->('MIRROR_HTTP') %>]]></media_url>
@@ -56,7 +56,7 @@
       <listentry>
         <alias>SLE-Module-Legacy</alias>
         % if ($check_var->('VERSION', '15-SP1')) {
-        <media_url><![CDATA[http://dist.suse.de/install/SLP/SLE-<%= $get_var->('VERSION') %>-Module-Legacy-GM/<%= $get_var->('ARCH') %>/DVD1/]]></media_url>
+        <media_url><![CDATA[http://<%= $get_var->('DIST_SUSE_DE_MIRROR', 'dist.suse.de') %>/install/SLP/SLE-<%= $get_var->('VERSION') %>-Module-Legacy-GM/<%= $get_var->('ARCH') %>/DVD1/]]></media_url>
         <product_dir>/</product_dir>
         % } else {
 	<media_url><![CDATA[<%= $get_var->('MIRROR_HTTP') %>]]></media_url>

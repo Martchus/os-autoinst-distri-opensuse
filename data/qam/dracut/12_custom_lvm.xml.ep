@@ -39,14 +39,14 @@
       % }
       % if ($check_var->('VERSION', '12-SP3') and $check_var->('FLAVOR', 'Server-DVD-Updates')) {
       <listentry>
-        <media_url>http://dist.suse.de/ibs/SUSE/Updates/SLE-SERVER/12-SP3-LTSS-TERADATA/x86_64/update/</media_url>
+        <media_url>http://<%= $get_var->('DIST_SUSE_DE_MIRROR', 'dist.suse.de') %>/ibs/SUSE/Updates/SLE-SERVER/12-SP3-LTSS-TERADATA/x86_64/update/</media_url>
         <name>12-SP3-LTSS-TERADATA-Updates</name>
         <alias>12-SP3-LTSS-TERADATA-Updates</alias>
       </listentry>
       % }
       % if ($check_var->('VERSION', '12-SP3') and $check_var->('FLAVOR', 'Server-DVD-Updates-TERADATA')) {
       <listentry>
-        <media_url>http://dist.suse.de/ibs/SUSE/Updates/SLE-SERVER/12-SP3-TERADATA/x86_64/update/</media_url>
+        <media_url>http://<%= $get_var->('DIST_SUSE_DE_MIRROR', 'dist.suse.de') %>/ibs/SUSE/Updates/SLE-SERVER/12-SP3-TERADATA/x86_64/update/</media_url>
         <name>12-SP3-TERADATA-Updates</name>
         <alias>12-SP3-TERADATA-Updates</alias>
       </listentry>

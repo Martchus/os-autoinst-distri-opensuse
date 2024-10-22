@@ -65,7 +65,7 @@
   <add-on>
     <add_on_products config:type="list">
       <listentry>
-        <media_url>http://download.suse.de/ibs/SUSE:/CA/{{CA_STR}}/</media_url>
+        <media_url>http://<%= $get_var->('DOWNLOAD_SUSE_DE_MIRROR', 'download.suse.de') %>/ibs/SUSE:/CA/{{CA_STR}}/</media_url>
       </listentry>
     % if ($vm_name =~ /sles12sp3/) {
       <listentry>

@@ -11,7 +11,7 @@
       <listentry>
         <name>SUSE-MicroOS-<%= $get_var->('VERSION') %>-Updates</name>
         <alias>SUSE-MicroOS-<%= $get_var->('VERSION') %>-Updates</alias>
-        <media_url><![CDATA[http://dist.suse.de/ibs/SUSE/Updates/SUSE-MicroOS/<%= $get_var->('VERSION') %>/<%= $get_var->('ARCH') %>/update/]]></media_url>
+        <media_url><![CDATA[http://<%= $get_var->('DIST_SUSE_DE_MIRROR', 'dist.suse.de') %>/ibs/SUSE/Updates/SUSE-MicroOS/<%= $get_var->('VERSION') %>/<%= $get_var->('ARCH') %>/update/]]></media_url>
       </listentry>
     </add_on_products>
   </add-on>

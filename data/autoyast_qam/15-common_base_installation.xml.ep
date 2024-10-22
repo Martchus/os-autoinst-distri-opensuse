@@ -46,7 +46,7 @@
       % }
       % if ($check_var->('VERSION', '15-SP3')) {
       <listentry>
-        <media_url>http://dist.suse.de/ibs/SUSE/Updates/SLE-Product-SLES/15-SP3-ERICSSON/x86_64/update/</media_url>
+        <media_url>http://<%= $get_var->('DIST_SUSE_DE_MIRROR', 'dist.suse.de') %>/ibs/SUSE/Updates/SLE-Product-SLES/15-SP3-ERICSSON/x86_64/update/</media_url>
         <name>15-SP3-ERICSSON-Updates</name>
         <alias>15-SP3-ERICSSON-Updates</alias>
       </listentry>

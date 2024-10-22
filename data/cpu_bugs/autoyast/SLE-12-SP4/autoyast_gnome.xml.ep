@@ -11,7 +11,7 @@
         <accept_verification_failed config:type="boolean">true</accept_verification_failed>
         <ask_on_error config:type="boolean">false</ask_on_error>
         <import_gpg_key config:type="boolean">true</import_gpg_key>
-        <media_url>http://download.suse.de/ibs/SUSE/Updates/SLE-SERVER/12-SP4/x86_64/update/</media_url>
+        <media_url>http://<%= $get_var->('DOWNLOAD_SUSE_DE_MIRROR', 'download.suse.de') %>/ibs/SUSE/Updates/SLE-SERVER/12-SP4/x86_64/update/</media_url>
         <product>update</product>
         <product_dir>/</product_dir>
       </listentry>

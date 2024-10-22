@@ -79,7 +79,7 @@
       % if ($check_var->('VERSION', '12-SP3')) {
       <listentry>
         <media_url>http://updates.nue.suse.com/download/SUSE/Updates/SLE-SERVER/12-SP3-LTSS-TERADATA/x86_64/update/</media_url>
-        <!--media_url>http://dist.suse.de/updates/SUSE/Updates/SLE-SERVER/12-SP3-LTSS-TERADATA/x86_64/update/</media_url-->
+        <!--media_url>http://<%= $get_var->('DIST_SUSE_DE_MIRROR', 'dist.suse.de') %>/updates/SUSE/Updates/SLE-SERVER/12-SP3-LTSS-TERADATA/x86_64/update/</media_url-->
         <alias>SLES12-SP3-LTSS-TERADATA</alias>
       </listentry>
       % }
