@@ -1,0 +1,3 @@
+[submodule "products/opensuse/needles"]
+	path = products/opensuse/needles
+	url = git@github.com:os-autoinst/os-autoinst-needles-opensuse.git
